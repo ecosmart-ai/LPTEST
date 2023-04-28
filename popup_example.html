@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Popup Example</title>
+	<style>
+		.popup {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #fff;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+			visibility: hidden;
+			opacity: 0;
+			transition: visibility 0s, opacity 0.5s ease-in-out;
+		}
+
+		.popup.active {
+			visibility: visible;
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+	<button onclick="showPopup()">Show Popup</button>
+
+	<script>
+		function showPopup() {
+			// Create a new popup element
+			var popup = document.createElement("div");
+			popup.classList.add("popup");
+			popup.innerHTML = "Hello, world!";
+
+			// Add the popup to the page
+			document.body.appendChild(popup);
+
+			// Show the popup for 1 second
+			setTimeout(function() {
+				popup.classList.add("active");
+				setTimeout(function() {
+					popup.classList.remove("active");
+					setTimeout(function() {
+						document.body.removeChild(popup);
+					}, 500); // Wait for the transition to complete before removing the element
+				}, 1000);
+			}, 100);
+		}
+	</script>
+</body>
+</html>
